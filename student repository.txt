@@ -1,0 +1,12 @@
+5)STUDENT REPOSITORY INTERFACE::
+
+package com.niranjan.demo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.niranjan.demo.entity.Students;
+
+public interface StudentRepository extends JpaRepository<Students,Long>{
+	
+
+}

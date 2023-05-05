@@ -1,0 +1,32 @@
+6)SPRING BOOT APPILICATION CLASS::
+package com.niranjan.demo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.niranjan.demo.entity.Students;
+import com.niranjan.demo.repository.StudentRepository;
+
+@SpringBootApplication
+public class StudentmanagementsystemApplication implements CommandLineRunner {
+
+	public static void main(String[] args) {
+		SpringApplication.run(StudentmanagementsystemApplication.class, args);
+	}
+	@Autowired
+	private StudentRepository studentrepository;
+	
+	
+	@Override
+	public void run(String... args) throws Exception {
+	/*Students student=new Students(1,"niranjan","rao","vananiranjan143@gmail.com",628132764,22,"fullstack developer");
+	studentrepository.save(student);
+	Students student1=new Students(2,"sai","krishan","niranjanaraovana@gmail.com",636294877,23,"java developer");
+	studentrepository.save(student1);*/
+	}
+
+}
+
+

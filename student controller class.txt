@@ -1,0 +1,65 @@
+2)STUDENT CONTROLLER CLASS::
+
+package com.niranjan.demo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.niranjan.demo.entity.Students;
+import com.niranjan.demo.service.StudentService;
+
+@Controller
+public class StudentController {
+	@Autowired
+	private StudentService studentservice; 
+	@GetMapping("/students")
+	public String listStudents(Model model) {
+		model.addAttribute("students",studentservice. getAllStudents());
+		
+		return"students";
+	}
+	@GetMapping("/students/new")
+public String createStudentForm(Model model) {
+	Students students=new Students();
+	model.addAttribute("students", students);
+	return "create_student";
+	
+}
+	@PostMapping("/students")
+	public String saveStudent(@ModelAttribute("students")Students students) {
+	  studentservice.saveStudents(students);
+		return "redirect:/students";
+	}
+	@GetMapping("/students/edit/{id}")
+	public String editStudentform(@PathVariable Long id,Model model) {
+		model.addAttribute("students",studentservice.getStudentById(id));
+		
+		return "edit_student";
+		
+	}
+	@PostMapping("/students/{id}")
+	public String updateStudent(@PathVariable Long id,
+			@ModelAttribute("students") Students students,Model model) {
+		Students existingStudent=studentservice.getStudentById(id);
+		existingStudent.setFname(students.getFname());
+		existingStudent.setLname(students.getLname());
+		
+		existingStudent.setEmail(students.getEmail());
+		existingStudent.setAge(students.getAge());
+		existingStudent.setPhonenumber(students.getPhonenumber());
+		existingStudent.setRole(students.getRole());
+		studentservice.upadteStudent(existingStudent);
+		return "redirect:/students";
+	}
+	@GetMapping("/students/{id}")
+	public String deleteStudent(@PathVariable Long id) {
+		studentservice.deleteStudentById(id);
+		return"redirect:/students";
+	}
+	
+}
